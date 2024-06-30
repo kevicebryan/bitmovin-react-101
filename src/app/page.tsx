@@ -25,7 +25,7 @@ export default function Home() {
   };
 
   const playerConfig: PlayerConfig = {
-    key: "7ea5492a-c818-4984-b20a-8323e21f7fa8",
+    key: process.env.NEXT_PUBLIC_BITMOVIN_PLAYER_KEY ?? "API_KEY",
     playback: {
       autoplay: true,
     },
