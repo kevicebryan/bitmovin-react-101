@@ -1,95 +1,80 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import { PlayerConfig, SourceConfig } from "bitmovin-player";
+import { PageWrapper, VideoWrapper } from "./style";
+import {
+  Container,
+  ControlBar,
+  FullscreenToggleButton,
+  PlaybackSpeedSelectBox,
+  PlaybackToggleButton,
+  PlaybackToggleOverlay,
+  SeekBar,
+  UIContainer,
+  VideoQualitySelectBox,
+  VolumeSlider,
+  VolumeToggleButton,
+} from "bitmovin-player-ui";
+import "bitmovin-player-ui/dist/css/bitmovinplayer-ui.css";
+
+import { BitmovinPlayer } from "bitmovin-player-react";
 
 export default function Home() {
+  const defaultPlayerSource: SourceConfig = {
+    hls: "https://cdn.bitmovin.com/content/assets/streams-sample-video/sintel/m3u8/index.m3u8",
+  };
+
+  const playerConfig: PlayerConfig = {
+    key: "7ea5492a-c818-4984-b20a-8323e21f7fa8",
+    playback: {
+      autoplay: true,
+    },
+  };
+
+  const leftContainer = new Container({ cssClass: "left-container" });
+  leftContainer.addComponent(new PlaybackToggleButton());
+  leftContainer.addComponent(new VolumeToggleButton());
+  leftContainer.addComponent(new VolumeSlider());
+
+  const rightContainer = new Container({ cssClass: "right-container" });
+  rightContainer.addComponent(new PlaybackSpeedSelectBox());
+  rightContainer.addComponent(new VideoQualitySelectBox());
+  rightContainer.addComponent(new FullscreenToggleButton());
+
+  const controlBarTop = new Container({
+    components: [new SeekBar()],
+    cssClasses: ["controlbar-top"],
+  });
+
+  const controlBarBottom = new Container({
+    components: [leftContainer, rightContainer],
+    cssClasses: ["controlbar-bottom"],
+  });
+
+  const uIContainer = () =>
+    new UIContainer({
+      cssClasses: ["kodio-bitmovin-player"],
+      hideDelay: 2000,
+      components: [
+        new PlaybackToggleOverlay(),
+        new ControlBar({
+          components: [controlBarTop, controlBarBottom],
+          cssClasses: ["controlbar-wrapper"],
+        }),
+      ],
+    });
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+    <PageWrapper>
+      <VideoWrapper>
+        <BitmovinPlayer
+          source={defaultPlayerSource}
+          config={playerConfig}
+          customUi={{
+            containerFactory: uIContainer,
+          }}
         />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      </VideoWrapper>
+    </PageWrapper>
   );
 }
