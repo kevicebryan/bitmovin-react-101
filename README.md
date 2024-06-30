@@ -2,20 +2,24 @@
 # Guide: How to make your own React Bitmovin Player UI (using NextJS)
  
 ## Getting Started
+Make an env file using the .env.example and replace the API_KEY with your own.
+The bitmovin player needs an API Key, which you can find in your profile settings **[here](https://dashboard.bitmovin.com)**. 
+Update the ``API_KEY`` with your own to be able to run the player.
+```jsx
+const playerConfig: PlayerConfig = {
+	key: {process.env.BITMOVIN_API_KEY ?? "API_KEY"},
+	playback: { autoplay: true,},
+};
+```
+
 To see the result run the development server:
 ```bash
 npm install
 npm run dev
 ```
 ### Bitmovin Player Guide
-The bitmovin player needs an API Key, which you can find in your profile settings **[here](https://dashboard.bitmovin.com)**. 
-Update the ``API_KEY`` with your own to be able to run the player.
-```jsx
-const playerConfig: PlayerConfig = {
-	key: "API_KEY",
-	playback: { autoplay: true,},
-};
-```
+
+
 
 If you want to change the video you can change it here:
 ```jsx
