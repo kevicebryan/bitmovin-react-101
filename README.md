@@ -39,22 +39,22 @@ If you want to change the video you can change it here:
 ### Styling Guide
 To create your bitmovin player UI, you create your own **UIContainer** and modify it based on your requirements. And pass it to the **BitmovinPlayer** in the **customUi** parameter:
 ```jsx
-	<BitmovinPlayer
-		source={defaultPlayerSource}
-		config={playerConfig}
-		customUi={{
+<BitmovinPlayer
+	source={defaultPlayerSource}
+	config={playerConfig}
+	customUi={{
 		containerFactory: uIContainer,
 		}}
-	/>
+/>
 ```
 
 
 To make styling easier give the component you want to style a classname with the ```cssClasses``` attribute like follows, 
 ```js
-	new ControlBar({
+new ControlBar({
 	components: [controlBarTop, controlBarBottom],
 	cssClasses: ["controlbar-wrapper"],
-	}),
+}),
 ```
 
 and reference that in the styling with ```bmpui- ```in front of the class name and hit it's the child div.
