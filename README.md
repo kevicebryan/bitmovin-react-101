@@ -19,9 +19,9 @@ const playerConfig: PlayerConfig = {
 
 If you want to change the video you can change it here:
 ```jsx
-  const defaultPlayerSource: SourceConfig = {
+const defaultPlayerSource: SourceConfig = {
     hls: "https://cdn.bitmovin.com/content/assets/streams-sample-video/sintel/m3u8/index.m3u8",
-  };
+};
 ```
 
 ## Packages used
