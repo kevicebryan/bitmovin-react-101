@@ -11,12 +11,10 @@ npm run dev
 The bitmovin player needs an API Key, which you can find in your profile settings **[here](https://dashboard.bitmovin.com)**. 
 Update the ``API_KEY`` with your own to be able to run the player.
 ```jsx
-  const playerConfig: PlayerConfig = {
-    key: "API_KEY",
-    playback: {
-      autoplay: true,
-    },
-  };
+const playerConfig: PlayerConfig = {
+	key: "API_KEY",
+	playback: { autoplay: true,},
+};
 ```
 
 If you want to change the video you can change it here:
@@ -42,9 +40,7 @@ To create your bitmovin player UI, you create your own **UIContainer** and modif
 <BitmovinPlayer
 	source={defaultPlayerSource}
 	config={playerConfig}
-	customUi={{
-		containerFactory: uIContainer,
-		}}
+	customUi={{ containerFactory: uIContainer, }}
 />
 ```
 
