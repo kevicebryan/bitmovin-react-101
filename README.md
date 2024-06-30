@@ -7,7 +7,7 @@ The bitmovin player needs an API Key, which you can find in your profile setting
 Update the ``API_KEY`` with your own to be able to run the player.
 ```jsx
 const playerConfig: PlayerConfig = {
-	key: {process.env.BITMOVIN_API_KEY ?? "API_KEY"},
+	key: process.env.NEXT_PUBLIC_BITMOVIN_PLAYER_KEY ?? "API_KEY",
 	playback: { autoplay: true,},
 };
 ```
